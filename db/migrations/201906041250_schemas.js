@@ -17,6 +17,14 @@ exports.up = knex => {
         table.enu('role', ['customer', 'admin', 'author']);
         table.timestamps();
     })
+    .createTable('basicauth', (table) => {
+        table.uuid('id').primary();
+        table.string('email').unique().notNullable();
+        table.string('password').notNullable();
+        table.string('apikey').unique().notNullable();
+        table.enu('device', ['android', 'ios', 'web']);
+        table.timestamps();
+    })
     .createTable('customers', table => {
         table.increments('id').primary();
         table
@@ -61,6 +69,7 @@ exports.up = knex => {
 exports.down = knex => {
     return knex.schema
     .dropTableIfExists('customersBook')
+    .dropTableIfExists('basicauth')
     .dropTableIfExists('books')
     .dropTableIfExists('authors')
     .dropTableIfExists('customers')
