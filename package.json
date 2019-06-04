@@ -1,0 +1,25 @@
+{
+  "name": "liabrary-mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vermaneha17/Liabrary-MySql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vermaneha17/Liabrary-MySql/issues"
+  },
+  "homepage": "https://github.com/vermaneha17/Liabrary-MySql#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "knex": "^0.17.3",
+    "mysql2": "^1.6.5",
+    "objection": "^1.6.9"
+  }
+}
