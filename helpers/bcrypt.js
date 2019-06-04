@@ -6,9 +6,9 @@ module.exports = {
     hash: password => {
         if (!password || String(password).trim() === '')
             throw new Error('Password cannot be null.');
-        return bcrypt.hash(password, salt);
+        return bcrypt.hashSync(password, salt);
     },
     compare: (password, hash) => {
-        return bcrypt.compare(password, hash);
+        return bcrypt.compareSync(password, hash);
     }
 };
