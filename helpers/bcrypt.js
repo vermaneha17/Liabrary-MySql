@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const salt = bcrypt.genSaltSync(parseInt(process.env.PASSWORD_SALT_ROUNDS));
+const salt = bcrypt.genSaltSync(10);
 
 module.exports = {
     hash: password => {

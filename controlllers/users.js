@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const createError = require('http-errors');
 
-const responseHandler = require('../middlewares/responseHandler');
 const bcrypt = require('../helpers/bcrypt');
 const User = require('../models/User');
 
@@ -21,13 +20,13 @@ module.exports = {
 
             const user = await User.query()
                 .where({ email: value.email })
-                .whereIn('role', value.role).first()
-                .eager('[author, customer]');
+                .whereIn('role', value.role).first();
+               // .eager('[author, customer]');
 
             if (!user || !bcrypt.compare(value.password, user.password)) 
                 throw messages.INCORRECT_EMAIL_OR_PASSWORD;
           
-            res.responseHandler({ user });
+            res.responseHandler(user);
         } catch (err) {
             return next(createError(423, err));
         }

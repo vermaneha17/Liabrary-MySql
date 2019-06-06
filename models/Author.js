@@ -19,7 +19,7 @@ class Author extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: `${__dirname}/Book`,
                 join:{
-                    from: 'authors.userId',
+                    from: 'authors.bookId',
                     to: 'books.id'
                 }
             }

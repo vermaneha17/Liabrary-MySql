@@ -1,11 +1,12 @@
-const { Model } = require('objection');
-const knex = require('knex');
+let { Model } = require('objection');
+let knex = require('knex');
 
 const config = require('../knexfile');
 const baseObjectionPlugin = require('../helpers/baseObjectionPlugin');
 
+const env = process.env.NODE_ENV || 'development';
 // Initialize knex.
-const knex = knex(config[process.env.NODE_ENV]);
+knex = knex(config[env]);
 // Give the knex object to objection.
 Model.knex(knex);
 

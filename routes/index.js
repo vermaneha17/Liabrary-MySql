@@ -5,7 +5,7 @@ const userController = require('../controlllers/users');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.json({ message: `Welcome to ${process.env.APP_NAME}` });
+    res.send(`Welcome To InBook`);
 });
 
 router.post('/login', userController.login);
