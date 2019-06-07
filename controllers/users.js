@@ -30,5 +30,21 @@ module.exports = {
         } catch (err) {
             return next(createError(423, err));
         }
+    },
+
+    signUP: async function (req, res, next) {
+        const schema = Joi.object().keys({
+            firstName: Joi.string().required(),
+            lastName: Joi.string().required(),
+            email: Joi.string().email({ minDomainAtoms: 2 }).required(),
+            phone: Joi.string().required(),
+            password: Joi.string().min(8).max(40).required(),
+            role: Joi.string().required()
+        }).unknown();
+        try{
+            const {firstName, lastName, email, phone, password, role} = req.body;
+        } catch (err) {
+
+        }
     }
 };
