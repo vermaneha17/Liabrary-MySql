@@ -10,7 +10,6 @@ exports.up = function (knex, Promise) {
         table.timestamps();
     })
 };
-
 exports.down = function (knex, Promise) {
     return knex.schema.dropTableIfExists('users');
 };
