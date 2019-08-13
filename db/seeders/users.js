@@ -1,3 +1,4 @@
+const uuid = require('uuid/v4');
 const bcrypt = require('../../helpers/bcrypt');
 
 exports.seed = function(knex, Promise) {
@@ -6,7 +7,13 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('users').insert([
-        {id: 1, firstName:'Neha', lastName:'Verma',email:'admin@gmail.com',password:bcrypt.hash('admin123'),role:'admin'}
+        {
+          id: uuid(),
+          fullName:'Admin',
+          email:'admin@gmail.com',
+          password:bcrypt.hash('admin123'),
+          role:'admin'
+        }
       ]);
     });
 };
