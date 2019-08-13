@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const createError = require('http-errors');
+const { raw } = require('objection');
 
 const bcrypt = require('../helpers/bcrypt');
 const User = require('../models/User');
@@ -32,7 +33,7 @@ module.exports = {
         }
     },
 
-    signUP: async function (req, res, next) {
+    signUp: async function (req, res, next) {
         const schema = Joi.object().keys({
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
@@ -42,7 +43,16 @@ module.exports = {
             role: Joi.string().required()
         }).unknown();
         try{
-            const {firstName, lastName, email, phone, password, role} = req.body;
+            const { email, role } = req.body;
+            Joi.validate(req.body, schema)
+                .then(() => {
+                    return User.query.findOne(raw(`role = '${role}'AND email = '${email}'`));
+                })
+                .then( user => {
+                    if( user )
+                        return next(createError(426, ALREADY_REGISTERED));
+                    return User.query.insert(firstName, lastName, email, phone, password, role );
+                })
         } catch (err) {
 
         }
