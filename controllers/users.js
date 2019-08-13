@@ -15,17 +15,15 @@ module.exports = {
         });
         try {
             const { error, value } = Joi.validate(req.body, schema);
-            if (error) 
+            if (error)
                 throw error;
 
             const user = await User.query()
                 .where({ email: value.email })
                 .whereIn('role', value.role).first();
-               // .eager('[author, customer]');
-
-            if (!user || !bcrypt.compare(value.password, user.password)) 
+            if (!user || !bcrypt.compare(value.password, user.password))
                 throw messages.INCORRECT_EMAIL_OR_PASSWORD;
-          
+
             res.responseHandler(user);
         } catch (err) {
             return next(createError(423, err));
